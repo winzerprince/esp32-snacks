@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'build/blinkers.bin'
+elf = 'build/blinkers.elf'
