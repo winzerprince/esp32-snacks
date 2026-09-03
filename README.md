@@ -12,11 +12,13 @@ A collection of small programs wirtten for esp32 mcirocontrollers primarily the 
 
 </div>
 
-## Blinkers(projects/blinkers)
 
 <div align="center">
+  <h2><a href="projects/blinkers">Blinkers</a></h2>
+
   <img src="./res/blinkers.png" alt="bliners wokwi simulation" width="50%">
+  <p>
+    <i>A simple program to blink the onboard LEDs of the esp32-s3 making use of the basic freertos api</i>
+  </p>
+
 </div>
-<p>
-    A simple program to blink the onboard LEDs of the esp32-s3 making use of the basic freertos api
-</p>
