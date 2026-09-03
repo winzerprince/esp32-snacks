@@ -12,8 +12,9 @@ A collection of small programs wirtten for esp32 mcirocontrollers primarily the 
 
 </div>
 
+## Blinkers(projects/blinkers)
+
 <div align="center">
-  <h2>[Blinkers](projects/blinkers)</h2>
   <img src="./res/blinkers.png" alt="bliners wokwi simulation" width="50%">
 </div>
 <p>
