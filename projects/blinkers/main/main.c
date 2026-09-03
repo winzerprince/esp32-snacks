@@ -1,78 +1,70 @@
 #include "driver/gpio.h"
+#include "esp_err.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
+#include "freertos/projdefs.h"
 #include "freertos/queue.h"
 #include "freertos/semphr.h"
 #include "freertos/task.h"
+#include "hal/gpio_types.h"
+#include "portmacro.h"
+#include "stdint.h"
+#include <stdint.h>
 
 #define RED_LED GPIO_NUM_1
 #define GREEN_LED GPIO_NUM_3
 #define BLUE_LED GPIO_NUM_4
 
+// Type to encapsulate led configs to pass to functions
+typedef struct {
+  gpio_num_t led;
+  char *name;
+  uint32_t delay;
+} led_config_t;
+
 static const char *TAG = "blinkers";
+void blink(void *args) {
+  uint32_t on = 1;
+  char *state;
 
-void blink_red(void *args) {
-  int on = 1;
-  char *state = "ON";
-  int delay = *(int *)args;
+  led_config_t *cfg = (led_config_t *)args;
 
   while (1) {
-    // Alternate between on and off
     on = on ? 0 : 1;
     state = on ? "ON" : "OFF";
-
-    gpio_set_level(RED_LED, on);
-    ESP_LOGI(TAG, "RED %s", state);
-    vTaskDelay(pdMS_TO_TICKS(delay));
-  }
-}
-
-void blink_green(void *args) {
-  int on = 1;
-  char *state = "ON";
-  int delay = *(int *)args;
-  while (1) {
-    // Alternate between on and off
-    on = on ? 0 : 1;
-    state = on ? "ON" : "OFF";
-
-    gpio_set_level(GREEN_LED, on);
-    ESP_LOGI(TAG, "GREEN %s", state);
-    vTaskDelay(pdMS_TO_TICKS(delay));
-  }
-}
-
-void blink_blue(void *args) {
-  int on = 1;
-  char *state = "ON";
-  int delay = *(int *)args;
-  while (1) {
-    // Alternate between on and off
-    on = on ? 0 : 1;
-    state = on ? "ON" : "OFF";
-
-    gpio_set_level(BLUE_LED, on);
-    ESP_LOGI(TAG, "BLUE %s", state);
-    vTaskDelay(pdMS_TO_TICKS(delay));
+    ESP_LOGI(TAG, "name: %s, on: %d", cfg->name, on);
+    ESP_ERROR_CHECK(gpio_set_level(cfg->led, on));
+    ESP_LOGI(TAG, "%s %s", cfg->name, state);
+    vTaskDelay(pdMS_TO_TICKS(cfg->delay));
   }
 }
 
 void app_main(void) {
-  gpio_reset_pin(RED_LED);
-  gpio_reset_pin(GREEN_LED);
-  gpio_reset_pin(BLUE_LED);
+  char task_name[100];
 
-  gpio_set_direction(RED_LED, GPIO_MODE_OUTPUT);
-  gpio_set_direction(GREEN_LED, GPIO_MODE_OUTPUT);
-  gpio_set_direction(BLUE_LED, GPIO_MODE_OUTPUT);
+  led_config_t red = {RED_LED, "RED", 125};
+  led_config_t green = {GREEN_LED, "GREEN", 250};
+  led_config_t blue = {BLUE_LED, "BLUE", 500};
 
-  static int red_delay = 125;
-  static int green_delay = 250;
-  static int blue_delay = 500;
+  led_config_t leds[3] = {red, green, blue};
 
-  // (void *) cast is optional as C can convert any object pointer to void *
-  // automatically
-  xTaskCreate(blink_red, "Blink Red", 4096, (void *)&red_delay, 2, NULL);
-  xTaskCreate(blink_green, "Blink Green", 4096, (void *)&green_delay, 2, NULL);
-  xTaskCreate(blink_blue, "Blink Blue", 4096, (void *)&blue_delay, 2, NULL);
+  // Reset pins, set levels and create tasks for each gpio pin
+  for (int i = 0; i < 3; i++) {
+    ESP_LOGI(TAG, "leds[%d]: pin=%d name=%s delay=%lu", i, leds[i].led,
+             leds[i].name, leds[i].delay);
+    // Rename the task for each iteration based on value of i
+    snprintf(task_name, sizeof(task_name), "%s-%d", "task", i);
+
+    ESP_ERROR_CHECK(gpio_reset_pin(leds[i].led));
+    ESP_ERROR_CHECK(gpio_set_direction(leds[i].led, GPIO_MODE_OUTPUT));
+
+    // (void *) cast is optional as C can convert any object pointer to void *
+    // automatically
+    // ESP_ERROR_CHECK(
+    //     xTaskCreate(blink, task_name, 4096, (void *)&leds[i], 2, NULL));
+
+    BaseType_t result =
+        xTaskCreate(blink, task_name, 4096, (void *)&leds[i], 2, NULL);
+    ESP_LOGI(TAG, "Task %d created result: %d (pdPASS=%d)", i, result, pdPASS);
+  }
 }
