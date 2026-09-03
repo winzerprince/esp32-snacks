@@ -42,11 +42,12 @@ void blink(void *args) {
 void app_main(void) {
   char task_name[100];
 
-  led_config_t red = {RED_LED, "RED", 125};
-  led_config_t green = {GREEN_LED, "GREEN", 250};
-  led_config_t blue = {BLUE_LED, "BLUE", 500};
+  // Ensure leds survives app_main since its used by tasks even after app_main
+  // returns
+  static led_config_t leds[3] = {
+      {RED_LED, "RED", 125}, {GREEN_LED, "GREEN", 250}, {BLUE_LED, "BLUE", 500}
 
-  led_config_t leds[3] = {red, green, blue};
+  };
 
   // Reset pins, set levels and create tasks for each gpio pin
   for (int i = 0; i < 3; i++) {
