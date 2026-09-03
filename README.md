@@ -12,7 +12,6 @@ A collection of small programs wirtten for esp32 mcirocontrollers primarily the 
 
 </div>
 
-
 <div align="center">
   <h2><a href="projects/blinkers">Blinkers</a></h2>
 
