@@ -7,15 +7,15 @@ A collection of small programs wirtten for esp32 mcirocontrollers primarily the 
   </p>
 <i>Made with</i>
 
-![Espressif](https://img.shields.io/badge/espressif-%23E7352C.svg?style=for-the-badge&logo=espressif&logoColor=white)
-![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
+![Espressif](https://img.shields.io/badge/espressif-%23E7352C.svg?style=plastice&logo=espressif&logoColor=white)
+![C](https://img.shields.io/badge/c-%2300599C.svg?style=plastic&logo=c&logoColor=white)
 
 </div>
 
 <div align="center">
-  <h2>Blinkers</h2>
+  <h2>[Blinkers](projects/blinkers)</h2>
   <img src="./res/blinkers.png" alt="bliners wokwi simulation" width="50%">
-  <p>
-    A simple program to blink the onboard led of the esp32-s3 making use of the basic freertos api
-  </p>
 </div>
+<p>
+    A simple program to blink the onboard LEDs of the esp32-s3 making use of the basic freertos api
+</p>
