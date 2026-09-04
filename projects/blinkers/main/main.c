@@ -31,7 +31,7 @@ void blink(void *args) {
   led_config_t *cfg = (led_config_t *)args;
 
   while (1) {
-    on = on ? 0 : 1;
+    on = !on;
     state = on ? "ON" : "OFF";
     ESP_ERROR_CHECK(gpio_set_level(cfg->led, on));
     ESP_LOGI(TAG, "%s %s", cfg->name, state);
@@ -40,9 +40,10 @@ void blink(void *args) {
 }
 
 void app_main(void) {
+  // Buffer for taskname which will change in the loop
   char task_name[100];
 
-  // Ensure "leds" survives app_main even after app_main returns
+  // Make static to ennsure "leds" survives app_main even after app_main returns
   static led_config_t leds[3] = {
       {RED_LED, "RED", 125}, {GREEN_LED, "GREEN", 250}, {BLUE_LED, "BLUE", 500}
 
