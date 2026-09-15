@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'build/7-seg-disp.bin'
+elf = 'build/7-seg-disp.elf'
