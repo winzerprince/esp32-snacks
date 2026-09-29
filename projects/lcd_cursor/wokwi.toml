@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'build/lcd_cursor.bin'
+elf = 'build/lcd_cursor.elf'

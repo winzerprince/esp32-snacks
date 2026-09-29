@@ -21,3 +21,13 @@ A collection of small programs wirtten for esp32 mcirocontrollers primarily the 
   </p>
 
 </div>
+
+<div align="center">
+  <h2><a href="projects/lcd_cursor">LCD Cursor</a></h2>
+
+  <img src="./res/lcd_cursor.png" alt="lcd_cursor wokwi simulation" width="50%">
+  <p>
+    <i>A simple program showing a blinking cursor on an  LCD1602  display</i>
+  </p>
+
+</div>

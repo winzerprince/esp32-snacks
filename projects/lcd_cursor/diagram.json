@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "author": "Winzer",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": 47.82,
+      "left": -168.23,
+      "attrs": {
+        "builder": "esp-idf"
+      }
+    },
+    {
+      "type": "wokwi-gnd",
+      "id": "gnd1",
+      "top": 249.6,
+      "left": 153,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -198.17,
+      "left": -233.6,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-vcc",
+      "id": "vcc1",
+      "top": 279.16,
+      "left": 86.4,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-gnd",
+      "id": "gnd2",
+      "top": 278.4,
+      "left": 37.8,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:1",
+      "lcd1:RS",
+      "green",
+      [
+        "h0"
+      ]
+    ],
+    [
+      "lcd1:RW",
+      "esp:2",
+      "green",
+      [
+        "v48",
+        "h-115.3"
+      ]
+    ],
+    [
+      "lcd1:VSS",
+      "gnd2:GND",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "lcd1:VDD",
+      "vcc1:VCC",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "lcd1:D0",
+      "esp:4",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "lcd1:D1",
+      "esp:5",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:6",
+      "lcd1:D2",
+      "green",
+      [
+        "h0"
+      ]
+    ],
+    [
+      "lcd1:D3",
+      "esp:7",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:15",
+      "lcd1:D4",
+      "green",
+      [
+        "h0"
+      ]
+    ],
+    [
+      "lcd1:D5",
+      "esp:16",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:17",
+      "lcd1:D6",
+      "green",
+      [
+        "h0"
+      ]
+    ],
+    [
+      "lcd1:D7",
+      "esp:18",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "lcd1:K",
+      "gnd1:GND",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "vcc1:VCC",
+      "lcd1:A",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "lcd1:E",
+      "esp:8",
+      "green",
+      [
+        "v0"
+      ]
+    ]
+  ],
+  "dependencies": {}
+}
