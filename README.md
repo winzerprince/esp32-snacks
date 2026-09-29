@@ -23,7 +23,7 @@ A collection of small programs wirtten for esp32 mcirocontrollers primarily the 
 </div>
 
 <div align="center">
-  <h2><a href="projects/7-seg-disp">Blinkers</a></h2>
+  <h2><a href="projects/7-seg-disp">7 Segment Display</a></h2>
 
   <img src="./res/7-seg-disp.png" alt="7-seg-disp wokwi simulation" width="50%">
   <p>
