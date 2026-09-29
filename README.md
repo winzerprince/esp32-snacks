@@ -23,6 +23,16 @@ A collection of small programs wirtten for esp32 mcirocontrollers primarily the 
 </div>
 
 <div align="center">
+  <h2><a href="projects/7-seg-disp">Blinkers</a></h2>
+
+  <img src="./res/7-seg-disp.png" alt="7-seg-disp wokwi simulation" width="50%">
+  <p>
+    <i>A program displaying numbers 0 through 9 on a seven segment display</i>
+  </p>
+
+</div>
+
+<div align="center">
   <h2><a href="projects/lcd_cursor">LCD Cursor</a></h2>
 
   <img src="./res/lcd_cursor.png" alt="lcd_cursor wokwi simulation" width="50%">
