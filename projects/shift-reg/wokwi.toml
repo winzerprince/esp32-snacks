@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+build = "build/shift-reg.elf"
+target = "build/shift-reg.bin"

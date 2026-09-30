@@ -89,21 +89,19 @@ void disp_num(int *value) {
 }
 
 // Test print output a number to display
-void test(void *args) { disp_num(&our_num); }
+void printer(void *args) { disp_num(&our_num); }
 
 // Test print output a number to display
-void test_1(void *args) {
+void incrementer(void *args) {
   while (1) {
-
-    printf("%d ", our_num);
-    vTaskDelay(pdMS_TO_TICKS(10));
+    vTaskDelay(pdMS_TO_TICKS(1000));
     ++our_num;
   }
 }
 
 void app_main(void) {
   gpio_init();
-  xTaskCreate(test, "test", 2048, NULL, 2, NULL);
+  xTaskCreate(incrementer, "incrementer", 2048, NULL, 2, NULL);
 
-  xTaskCreate(test_1, "test_1", 2048, NULL, 2, NULL);
+  xTaskCreate(printer, "printer", 2048, NULL, 2, NULL);
 }
