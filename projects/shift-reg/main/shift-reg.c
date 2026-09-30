@@ -22,7 +22,7 @@ int our_num = 0;
 
 uint8_t NUM[10] = {
     0b11000000, 0b11111001, 0b10100100, 0b10110000, 0b10011001,
-    0b10010010, 0b10000010, 0b11111000, 0b10000000, 0b10001000,
+    0b10010010, 0b10000010, 0b11111000, 0b10000000, 0b10010000,
 };
 
 void gpio_init() {
@@ -78,6 +78,10 @@ void disp_num(int *value) {
     num = (*value % (pv * 10)) / pv; // extract digit from place value
 
     disp_dig(num, DIG_LIST[dig_count]);
+    if (dig_count == 3) {
+
+      vTaskDelay(pdMS_TO_TICKS(10));
+    }
 
     pv *= 10;
     ++dig_count;
@@ -85,18 +89,14 @@ void disp_num(int *value) {
 }
 
 // Test print output a number to display
-void test(void *args) {
-  disp_num(&our_num);
-
-  printf("Okay");
-}
+void test(void *args) { disp_num(&our_num); }
 
 // Test print output a number to display
 void test_1(void *args) {
   while (1) {
 
     printf("%d ", our_num);
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    vTaskDelay(pdMS_TO_TICKS(10));
     ++our_num;
   }
 }
