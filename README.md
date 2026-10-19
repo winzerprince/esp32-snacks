@@ -41,3 +41,13 @@ A collection of small programs wirtten for esp32 mcirocontrollers primarily the 
   </p>
 
 </div>
+
+<div align="center">
+  <h2><a href="projects/interrupt-counter">Interrupt Counter</a></h2>
+
+  <img src="./res/interrupt-counter.png" alt="Interrupt counter using button" width="50%">
+  <p>
+    <i> Interrupt counter using button to trigger interrupt without debouncing</i>
+  </p>
+
+</div>
